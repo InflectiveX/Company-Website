@@ -26,7 +26,66 @@ export default function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [allPagesOpen, setAllPagesOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeSection, setActiveSection] = useState("home");
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const contactBtnRef = useRef<HTMLAnchorElement>(null);
+  const [btnOffset, setBtnOffset] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll =
+        document.documentElement.scrollHeight - window.innerHeight;
+      const currentProgress = (window.scrollY / totalScroll) * 100;
+      setScrollProgress(currentProgress);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: "-15% 0px -75% 0px",
+      threshold: 0,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, observerOptions);
+
+    const sectionIds = ["home", "work", "blogs", "process", "cta"];
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!contactBtnRef.current) return;
+      const rect = contactBtnRef.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const distanceX = e.clientX - centerX;
+      const distanceY = e.clientY - centerY;
+      const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+      if (distance < 80) {
+        setBtnOffset({ x: distanceX * 0.35, y: distanceY * 0.35 });
+      } else {
+        setBtnOffset({ x: 0, y: 0 });
+      }
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -74,7 +133,7 @@ export default function Navbar() {
           }}
         >
           {navLinks.map((link) => {
-            const isActive = link.href === "#home" && pathname === "/";
+            const isActive = link.href === `#${activeSection}`;
             return (
               <Link
                 key={link.label}
@@ -153,6 +212,7 @@ export default function Navbar() {
 
         {/* Contact Us CTA */}
         <Link
+          ref={contactBtnRef}
           href="/contact"
           className="hidden md:inline-flex items-center z-10 text-white text-[15px] font-medium transition-all duration-300 hover:scale-105 hover:shadow-[0_0_15px_rgba(76,117,255,0.5)]"
           style={{
@@ -163,6 +223,7 @@ export default function Navbar() {
             fontFamily: "'Rethink Sans', sans-serif",
             fontWeight: 500,
             fontSize: "15px",
+            transform: `translate(${btnOffset.x}px, ${btnOffset.y}px)`,
           }}
         >
           Contact Us
@@ -208,7 +269,7 @@ export default function Navbar() {
               className="py-2 text-[15px] font-medium transition-colors"
               style={{
                 color:
-                  pathname === link.href
+                  activeSection === link.href.replace('#', '')
                     ? "rgb(255,255,255)"
                     : "rgb(167, 173, 190)",
                 fontFamily: "'Rethink Sans', sans-serif",
@@ -232,6 +293,13 @@ export default function Navbar() {
           </Link>
         </nav>
       )}
+      {/* Scroll Progress Bar */}
+      <div className="absolute bottom-0 left-0 h-[2px] w-full bg-[#131839]">
+        <div 
+          className="h-full bg-gradient-to-r from-[#4c75ff] to-[#194eff] transition-all duration-150 ease-out"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
     </header>
   );
 }
