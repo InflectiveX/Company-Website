@@ -43,15 +43,23 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 w-full">
-      <div className="relative flex items-center justify-evenly w-full px-8 h-[80px]">
+      <div className="relative flex items-center justify-between w-full max-w-[1094px] mx-auto px-6 h-[80px]">
         {/* Logo */}
-        <Link href="/" className="flex-shrink-0 z-10">
+        <Link
+          href="/"
+          className="flex-shrink-0 z-10 flex items-center justify-center p-0.5"
+          style={{
+            backgroundColor: "rgba(10, 13, 31, 0.8)",
+            backdropFilter: "blur(10px)",
+            borderRadius: "10px",
+            border: "1px solid rgb(35, 45, 107)",
+          }}
+        >
           <Image
-            src="/logonewtansoaent.png"
+            src="/logo_white.png"
             alt="Logo"
-            width={95}
-            height={32}
-            className=" bg-white rounded-sm "
+            width={50}
+            height={50}
           />
         </Link>
 
@@ -71,7 +79,7 @@ export default function Navbar() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="px-[14px] py-[7px] text-[15px] font-medium transition-colors rounded-full"
+                className={`px-[14px] py-[7px] text-[15px] font-medium transition-all rounded-full ${!isActive ? 'hover:text-white hover:bg-[#13183980]' : ''}`}
                 style={{
                   backgroundColor: isActive ? "rgb(19, 24, 57)" : "transparent",
                   border: `1px solid ${isActive ? "rgb(31, 39, 95)" : "transparent"}`,
@@ -90,7 +98,7 @@ export default function Navbar() {
           <div ref={dropdownRef} className="relative">
             <button
               onClick={() => setAllPagesOpen((v) => !v)}
-              className="flex items-center gap-2 px-[14px] py-[7px] rounded-full transition-colors hover:bg-[#13183980]"
+              className="flex items-center gap-2 px-[14px] py-[7px] rounded-full transition-all hover:text-white hover:bg-[#13183980]"
               style={{
                 color: "rgb(167, 173, 190)",
                 fontFamily: "'Rethink Sans', sans-serif",
@@ -155,7 +163,7 @@ export default function Navbar() {
         {/* Contact Us CTA */}
         <Link
           href="/contact"
-          className="hidden md:inline-flex items-center z-10 text-white text-[15px] font-medium transition-opacity hover:opacity-90"
+          className="hidden md:inline-flex items-center z-10 text-white text-[15px] font-medium transition-all duration-300 hover:scale-105 hover:shadow-[0_0_15px_rgba(76,117,255,0.5)]"
           style={{
             background:
               "linear-gradient(rgb(76, 117, 255) 0%, rgb(26, 79, 255) 100%)",
