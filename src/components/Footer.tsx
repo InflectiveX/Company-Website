@@ -10,10 +10,10 @@ const homeLinks = [
 ];
 
 const otherLinks = [
-  { label: "Works", href: "/works" },
-  { label: "Blogs", href: "/blogs" },
-  { label: "Timeline", href: "/timeline" },
-  { label: "Waitlist", href: "/waitlist" },
+  { label: "Works", href: "#work" },
+  { label: "Blogs", href: "#blogs" },
+  { label: "Timeline", href: "#process" },
+  { label: "Waitlist", href: "#cta" },
   { label: "Privacy policy", href: "/privacy-policy" },
 ];
 

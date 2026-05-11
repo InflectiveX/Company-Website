@@ -74,7 +74,7 @@ export default function Navbar() {
           }}
         >
           {navLinks.map((link) => {
-            const isActive = pathname === link.href;
+            const isActive = link.href === "#home" && pathname === "/";
             return (
               <Link
                 key={link.label}
