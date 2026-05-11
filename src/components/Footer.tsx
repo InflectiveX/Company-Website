@@ -84,10 +84,10 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <Link href="/" className="block mb-4">
               <Image
-                src="/logonew.png"
+                src="/logo_white.png"
                 alt="InflectiveX Logo"
-                width={53}
-                height={50}
+                width={80}
+                height={28}
               />
             </Link>
             <p className="text-[#6d7792] text-[15px] leading-[1.6] mb-6 max-w-[280px]">

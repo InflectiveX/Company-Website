@@ -29,7 +29,7 @@ const posts = [
 
 export default function Blogs() {
   return (
-    <section className="py-16 md:py-24">
+    <section id="blogs" className="py-16 md:py-24">
       <div className="max-w-[1200px] mx-auto px-6">
         {/* Header */}
         <div className="relative text-center mb-14">

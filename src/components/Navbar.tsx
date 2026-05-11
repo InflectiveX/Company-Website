@@ -6,19 +6,19 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "Works", href: "/works" },
-  { label: "Blogs", href: "/blogs" },
-  { label: "Timeline", href: "/timeline" },
-  { label: "Waitlist", href: "/waitlist" },
+  { label: "Home", href: "#home" },
+  { label: "Works", href: "#work" },
+  { label: "Blogs", href: "#blogs" },
+  { label: "Timeline", href: "#process" },
+  { label: "Waitlist", href: "#cta" },
 ];
 
 const allPages = [
-  { label: "Home", href: "/" },
-  { label: "Works", href: "/works" },
-  { label: "Blogs", href: "/blogs" },
-  { label: "Timeline", href: "/timeline" },
-  { label: "Waitlist", href: "/waitlist" },
+  { label: "Home", href: "#home" },
+  { label: "Works", href: "#work" },
+  { label: "Blogs", href: "#blogs" },
+  { label: "Timeline", href: "#process" },
+  { label: "Waitlist", href: "#cta" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -79,11 +79,8 @@ export default function Navbar() {
               <Link
                 key={link.label}
                 href={link.href}
-                className={`px-[14px] py-[7px] text-[15px] font-medium transition-all rounded-full ${!isActive ? 'hover:text-white hover:bg-[#13183980]' : ''}`}
+                className={`px-[14px] py-[7px] text-[15px] font-medium transition-all rounded-full border ${isActive ? 'text-white bg-[#131839] border-[#1f275f]' : 'text-[#a7adbe] border-transparent hover:text-white hover:bg-[#13183980]'}`}
                 style={{
-                  backgroundColor: isActive ? "rgb(19, 24, 57)" : "transparent",
-                  border: `1px solid ${isActive ? "rgb(31, 39, 95)" : "transparent"}`,
-                  color: isActive ? "rgb(255, 255, 255)" : "rgb(167, 173, 190)",
                   fontFamily: "'Rethink Sans', sans-serif",
                   fontWeight: 500,
                   fontSize: "15px",
@@ -98,13 +95,11 @@ export default function Navbar() {
           <div ref={dropdownRef} className="relative">
             <button
               onClick={() => setAllPagesOpen((v) => !v)}
-              className="flex items-center gap-2 px-[14px] py-[7px] rounded-full transition-all hover:text-white hover:bg-[#13183980]"
+              className="flex items-center gap-2 px-[14px] py-[7px] rounded-full transition-all text-[#a7adbe] hover:text-white hover:bg-[#13183980] border border-transparent"
               style={{
-                color: "rgb(167, 173, 190)",
                 fontFamily: "'Rethink Sans', sans-serif",
                 fontWeight: 500,
                 fontSize: "15px",
-                border: "1px solid transparent",
               }}
             >
               All Pages
@@ -120,7 +115,7 @@ export default function Navbar() {
               >
                 <path
                   d="M2 4L6 8L10 4"
-                  stroke="rgb(167, 173, 190)"
+                  stroke="currentColor"
                   strokeWidth="1.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -143,12 +138,8 @@ export default function Navbar() {
                     key={page.label}
                     href={page.href}
                     onClick={() => setAllPagesOpen(false)}
-                    className="px-4 py-2 text-[14px] font-medium transition-colors hover:text-white"
+                    className={`px-4 py-2 text-[14px] font-medium transition-colors ${pathname === page.href ? 'text-white' : 'text-[#a7adbe] hover:text-white'}`}
                     style={{
-                      color:
-                        pathname === page.href
-                          ? "rgb(255,255,255)"
-                          : "rgb(167, 173, 190)",
                       fontFamily: "'Rethink Sans', sans-serif",
                     }}
                   >

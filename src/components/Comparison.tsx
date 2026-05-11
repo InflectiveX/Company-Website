@@ -151,10 +151,10 @@ export default function Comparison() {
             >
               <div className="ml-10">
                 <Image
-                  src="/logonew.png"
+                  src="/logo_white.png"
                   alt="InflectiveX Logo"
-                  width={54}
-                  height={50}
+                  width={80}
+                  height={80}
                   style={{ objectFit: "contain" }}
                 />
               </div>
