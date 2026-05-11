@@ -47,7 +47,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link
           href="/"
-          className="flex-shrink-0 z-10 flex items-center justify-center p-0.5"
+          className="flex-shrink-0 z-10 flex items-center justify-center p-0.5 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_15px_rgba(76,117,255,0.3)]"
           style={{
             backgroundColor: "rgba(10, 13, 31, 0.8)",
             backdropFilter: "blur(10px)",
@@ -65,7 +65,7 @@ export default function Navbar() {
 
         {/* Center Pill — Desktop */}
         <div
-          className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-1 px-2 py-2"
+          className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-1 px-2 py-2 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(76,117,255,0.2)]"
           style={{
             backgroundColor: "rgba(10, 13, 31, 0.8)",
             backdropFilter: "blur(10px)",
